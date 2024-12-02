@@ -355,6 +355,58 @@
 	
 	<!-- Library - Theme JS -->
 	<script src="assets/js/functions.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#contactForm').on('submit', function(e) {
+          e.preventDefault();
+          
+          var name = $('#name').val();
+          var phone = $('#phone').val();
+          var message = $('#message').val();
+  
+          $.ajax({
+            url: 'https://script.google.com/macros/s/AKfycbyPvaLqLXe6yYsPQ5FIz0PtZKySxN9BIl8b4AYZ1clmi5detG3eXJwfK5NtUGM+P-Isu/exec63+', // Replace with your Google Apps Script URL
+            method: 'POST',
+            data: {
+              name: name,
+              email: email,
+              phone: phone,
+              subject: subject,
+              message: message
+            },
+            success: function(response) {
+              toastr.success('Form submitted successfully!');
+              setTimeout(function() {
+                window.location.href = 'http://127.0.0.1:5500/contact.html';
+              }, 3000);
+            },
+            error: function() {
+              toastr.error('There was an error submitting the form. Please try again.');
+            }
+          });
+        });
+      });
+  
+      toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-full-width",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+    </script>
 	
 </body>
 </html>
