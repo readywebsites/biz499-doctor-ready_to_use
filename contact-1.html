@@ -51,6 +51,7 @@
 	<link href="assets/css/rtl.css" rel="stylesheet">
 	<link id="color" href="assets/css/color-schemes/default.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 	
 	<!-- Custom - Theme CSS -->
 	<link rel="stylesheet" type="text/css" href="style.css">
@@ -213,18 +214,18 @@
 					</div>
 					<div class="contact-form">
 						<h5>Send us a message</h5>
-						<form class="row">
+						<form class="row" id="contactForm">
 							<div class="col-md-6 col-sm-6 col-xs-12 form-group">
-								<input type="text" class="form-control" placeholder="Your Name" name="contact-name" id="input_name" required="" />
+								<input type="text" id="name"  class="form-control name" placeholder="Name">
 							</div>
 							<div class="col-md-6 col-sm-6 col-xs-12 form-group">
-								<input type="text" class="form-control" placeholder="Your Phone" name="contact-phone" id="input_phone" required="" />
+								<input type="text" id="phone"  class="form-control phone" placeholder="Phone">
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-								<textarea class="form-control" placeholder="Message" rows="6" name="textarea-message" id="textarea_message"></textarea>
+								<textarea id="message" placeholder="Message" class="form-control"></textarea>
 							</div>
 							<div class="form-group col-md-12 col-sm-12 col-xs-12">
-								<button title="Submit" type="submit" id="btn_submit" name="post">Send</button>
+								<button type="submit" class="common_btn">Submit Now <i class="ensurx-arrow-right"></i></button>
 							</div>
 							<div id="alert-msg" class="alert-msg"></div>
 						</form>
@@ -305,7 +306,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-6 contact-form">
 					<h3 class="widget-title">Any Questions ?</h3>
-					<form>
+					<form id="contactForm2">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="full Name" name="contact-fname" id="input_fname" required="" />
 						</div>
@@ -356,7 +357,7 @@
 	
 	<!-- Library - Theme JS -->
 	<script src="assets/js/functions.js"></script>
-
+	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
       $(document).ready(function() {
@@ -368,19 +369,17 @@
           var message = $('#message').val();
   
           $.ajax({
-            url: 'https://script.google.com/macros/s/AKfycbyPvaLqLXe6yYsPQ5FIz0PtZKySxN9BIl8b4AYZ1clmi5detG3eXJwfK5NtUGM+P-Isu/exec63+', // Replace with your Google Apps Script URL
+            url: 'https://script.google.com/macros/s/AKfycbw-inSCnCmGHck4AUEYc9qoa9eHwMVNDLwVi12FM4z5Wva_cQ2FglAXSUTg6eAKg3Ut/exec', // Replace with your Google Apps Script URL
             method: 'POST',
             data: {
               name: name,
-              email: email,
               phone: phone,
-              subject: subject,
               message: message
             },
             success: function(response) {
               toastr.success('Form submitted successfully!');
               setTimeout(function() {
-                window.location.href = 'http://127.0.0.1:5500/contact.html';
+                window.location.href = 'http://127.0.0.1:5500/biz499-doctor-ready_to_use-main/contact-1.html?';
               }, 3000);
             },
             error: function() {
@@ -408,6 +407,36 @@
     "hideMethod": "fadeOut"
   }
     </script>
-	
+	     <script>
+			$(document).ready(function() {
+			  // Handle submission for Form 1
+			  $('#contactForm1').on('submit', function(e) {
+				e.preventDefault();
+				
+				var cname = $('#cname1').val();
+				var cemail = $('#cemail1').val();
+				var csubject = $('#csubject1').val();
+				var cmessage = $('#cmessage1').val();
+		
+				$.ajax({
+				  url: 'https://script.https://script.google.com/macros/s/AKfycby4criRHPbTZRB5WVpfAbmIdzUqCAz_qkoxsrWD-5arqTAmEstcxmTeaUh8jUipm0VP/exec.com/https://script.google.com/macros/s/AKfycby4criRHPbTZRB5WVpfAbmIdzUqCAz_qkoxsrWD-5arqTAmEstcxmTeaUh8jUipm0VP/exec/s/YOUR_SCRIPT_ID/exec', // Your Google Apps Script URL
+				  method: 'POST',
+				  data: {
+					cname: cname,
+					cemail: cemail,
+					csubject: csubject,
+					cmessage: cmessage,
+					formType: 'form1'  // Send formType to distinguish the form
+				  },
+				  success: function(response) {
+					toastr.success('Form 1 submitted successfully!');
+					$('#contactForm1')[0].reset();  // Reset Form 1 after submission
+				  },
+				  error: function() {
+					toastr.error('There was an error submitting Form 1. Please try again.');
+				  }
+				});
+			  });
+			</script>	
 </body>
 </html>
